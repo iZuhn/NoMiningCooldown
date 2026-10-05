@@ -11,7 +11,7 @@ public class NoMiningCooldown {
     public static void initClient() {
         toggleKey = Services.CLIENT_INPUT.registerKeyBinding(
                 "key.nmc.toggle",
-                71,
+                10,
                 KeyMapping.Category.MISC
         );
 
