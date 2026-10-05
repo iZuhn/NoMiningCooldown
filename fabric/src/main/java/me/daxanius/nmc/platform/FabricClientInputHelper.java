@@ -4,7 +4,6 @@ import me.daxanius.nmc.platform.services.IClientInputHelper;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
 import net.fabricmc.fabric.api.client.keymapping.v1.KeyMappingHelper;
 import net.minecraft.client.KeyMapping;
-import com.mojang.blaze3d.platform.InputConstants;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,7 +15,6 @@ public class FabricClientInputHelper implements IClientInputHelper {
     public Object registerKeyBinding(String translationKey, int defaultKeyCode, KeyMapping.Category category) {
         return KeyMappingHelper.registerKeyMapping(new KeyMapping(
                 translationKey,
-                InputConstants.Type.KEYSYM,
                 defaultKeyCode,
                 category
         ));
@@ -25,7 +23,6 @@ public class FabricClientInputHelper implements IClientInputHelper {
     @Override
     public void onClientTick(Runnable callback) {
         tickCallbacks.add(callback);
-        // Only register once globally
         if (tickCallbacks.size() == 1) {
             ClientTickEvents.END_CLIENT_TICK.register(client -> tickCallbacks.forEach(Runnable::run));
         }
